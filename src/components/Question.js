@@ -1,14 +1,54 @@
-import React from 'react'
+import React, { Component } from 'react';
+import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { createPost } from '../actions';
 
-const Question = () => {
-    return (
-        <div className = "container">
-            <h4 className="center">Question</h4>
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent molestie, lectus at ultricies volutpat, metus diam ornare augue, ut porta magna mauris sit amet tellus. Suspendisse dictum leo ac convallis dapibus. Mauris eu leo iaculis, lobortis tellus vel, tempus dolor. Nam a dui sed mauris tincidunt lobortis suscipit in eros. Donec dictum mauris vitae velit vulputate tempor. Nunc nec urna placerat, volutpat justo vitae, pharetra felis. Nam ornare, nunc ac ullamcorper commodo, ante ante consequat nibh, sed varius velit ipsum a augue. Proin ultrices ex ac risus venenatis tristique. Ut lacinia odio id nulla rhoncus consequat. Sed iaculis varius erat, in condimentum augue suscipit eget. Praesent consequat sem ante, sed pharetra justo ullamcorper non.
-            </p>
-        </div>
-    );
+class Question extends Component {
+    render() {
+        const { handleSubmit } = this.props;
+        return (
+            <div className = "container">
+                <h4 className="center">Question</h4>
+                <form onSubmit={ handleSubmit }>
+                    <div>
+                        <label>Tema</label>
+                        <div>
+                            <Field label="Tema" name="tema" component="input" type="text"/>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Nombre</label>
+                        <div>
+                            <Field label="Nombre" name="nombre" component="input" type="text"/>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Descripcion</label>
+                        <div>
+                            <Field label="Tema" name="descripcion" component="input" type="text"/>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Pregunta</label>
+                        <div>
+                            <Field label="Tema" name="pregunta" component="textarea" type="text"/>
+                        </div>
+                    </div>
+                    <button type = "submit">Guardar</button>
+                </form>
+            </div>
+        );
+    }
 }
 
-export default Question;
+function validate(values) {
+    const errors = {};
+    return errors;
+}
+
+export default reduxForm({
+    validate,
+    form: 'PostQuestionForm'
+})(
+    connect(null, { createPost })(Question)
+);

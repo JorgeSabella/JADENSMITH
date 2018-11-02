@@ -25,7 +25,6 @@ class NewExam extends Component {
                 "text": sub
             }
         };
-        console.log(post)
         this.props.createPost(post);
     }
 
@@ -46,7 +45,7 @@ class NewExam extends Component {
 
 function validate(values) {
     const errors = {};
-    // if (!values.title) {
+    // if (!values.materia) {
     //     errors.title = "Enter a title"
     // }
     // if (!values) {

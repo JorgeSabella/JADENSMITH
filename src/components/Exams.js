@@ -11,7 +11,6 @@ class Exams extends Component {
 
     renderPosts() {
         return _.map(this.props.posts, post=> {
-            console.log(post);
             return (
                 <li className="collection-item" key={post.id}>
                     {post.text}
