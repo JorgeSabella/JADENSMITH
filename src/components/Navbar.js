@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     return (
-        <nav className = "nav-wrapper blue darken-3">
-            <div className = "container">
-                <a className = "left brand-logo">Jaden Smith</a>
-                <ul className="right">
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/exams">Exams</Link></li>
-                    <li><Link to="/newexam">Create Exam</Link></li>
-                    <li><Link to="/question">New Question</Link></li>
+        <nav className = "navbar navbar-dark bg-primary">
+            <a className = "navbar-brand" href="#">Jaden Smith</a>
+            <div className = "">
+                <ul className="navbar-nav">
+                    <li className ="nav-item"><Link to="/" className="text-white">Home</Link></li>
+                    <li><Link to="/exams" className="text-white">Exams</Link></li>
+                    <li><Link to="/newexam" className="text-white">Create Exam</Link></li>
+                    <li><Link to="/question" className="text-white">New Question</Link></li>
                 </ul>
             </div>
         </nav>
