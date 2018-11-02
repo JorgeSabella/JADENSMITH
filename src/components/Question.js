@@ -4,39 +4,35 @@ import { connect } from 'react-redux';
 import { createPost } from '../actions';
 
 class Question extends Component {
+
+    renderField(field) {
+        return (
+            <div className="form-group">
+                <label>{field.label}</label>
+                <input
+                    className="form-control"
+                    type="text"
+                    {...field.input}
+                />
+            </div>
+        );
+    }
+
     render() {
         const { handleSubmit } = this.props;
         return (
-            <div className = "container">
-                <h4 className="center">Question</h4>
-                <form onSubmit={ handleSubmit }>
+            <form onSubmit={ handleSubmit }>
+                <Field label="Tema" name="tema" component={this.renderField} type="text"/>
+                <Field label="Nombre" name="nombre" component={this.renderField} type="text"/>
+                <Field label="Tema" name="descripcion" component={this.renderField} type="text"/>
+                <div>
+                    <label>Pregunta</label>
                     <div>
-                        <label>Tema</label>
-                        <div>
-                            <Field label="Tema" name="tema" component="input" type="text"/>
-                        </div>
+                        <Field label="Tema" name="pregunta" component="textarea" type="text"/>
                     </div>
-                    <div>
-                        <label>Nombre</label>
-                        <div>
-                            <Field label="Nombre" name="nombre" component="input" type="text"/>
-                        </div>
-                    </div>
-                    <div>
-                        <label>Descripcion</label>
-                        <div>
-                            <Field label="Tema" name="descripcion" component="input" type="text"/>
-                        </div>
-                    </div>
-                    <div>
-                        <label>Pregunta</label>
-                        <div>
-                            <Field label="Tema" name="pregunta" component="textarea" type="text"/>
-                        </div>
-                    </div>
-                    <button type = "submit">Guardar</button>
-                </form>
-            </div>
+                </div>
+                <button className="btn btn-primary"type = "submit">Guardar</button>
+            </form>
         );
     }
 }
