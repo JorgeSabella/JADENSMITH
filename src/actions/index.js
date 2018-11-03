@@ -4,7 +4,7 @@ export const FETCH_POSTS = 'fetch_posts';
 export const CREATE_POST = 'create_post';
 
 const ROOT_URL = 'https://jsonplaceholder.typicode.com'
-const ROOT = 'http://10.12.60.38:3000'
+const ROOT = 'https://mejorado.herokuapp.com'
 
 export function fetchPosts() {
     const request = axios.get(`${ROOT}/subjects`);
