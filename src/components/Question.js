@@ -31,7 +31,7 @@ class Question extends Component {
                         <Field label="Tema" name="pregunta" component="textarea" type="text"/>
                     </div>
                 </div>
-                <button className="btn btn-primary"type = "submit">Guardar</button>
+                <button className="btn btn-primary" type = "submit">Guardar</button>
             </form>
         );
     }
