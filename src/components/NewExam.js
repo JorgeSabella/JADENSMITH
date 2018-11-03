@@ -6,7 +6,7 @@ import { createPost } from '../actions';
 class NewExam extends Component {
     renderField(field) {
         return (
-            <div>
+            <div classNam="input-field">
                 <label>{field.label}</label>
                 <input
                     type="text"
@@ -34,14 +34,17 @@ class NewExam extends Component {
     render() {
         const { handleSubmit } = this.props;
         return (
-            <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-                <Field label="Nombre" name="examName" component={this.renderField}/>
-                <Field label="Institucion" name="insti" component={this.renderField}/>
-                <Field label="Profesor" name="prof" component={this.renderField}/>
-                <Field label="Tema" name="tema" component={this.renderField}/>
-                <Field label="Nombre Alumno" name="nombreAlumno" component={this.renderField}/>
-                <button type="submit">Submit</button>
-            </form>
+            <div className= "container">
+                <form className = "white" onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+                    <h5 className = "grey-text text-darken-3">Crear examen</h5>
+                    <Field label="Nombre" name="examName" component={this.renderField}/>
+                    <Field label="Institucion" name="insti" component={this.renderField}/>
+                    <Field label="Profesor" name="prof" component={this.renderField}/>
+                    <Field label="Tema" name="tema" component={this.renderField}/>
+                    <Field label="Nombre Alumno" name="nombreAlumno" component={this.renderField}/>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
         );
     }
 }
