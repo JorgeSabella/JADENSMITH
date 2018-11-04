@@ -14,6 +14,14 @@ export function fetchPosts() {
     }
 }
 
+export function fetchPreguntas() {
+    const request = axios.get(`${ROOT}/questions`);
+    return {
+        type: FETCH_POSTS,
+        payload: request
+    }
+}
+
 export function createPost(values) {
     const request = axios.post(`${ROOT}/subjects`, values);
     return {
