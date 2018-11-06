@@ -12,9 +12,22 @@ class Exams extends Component {
     renderPosts() {
         return _.map(this.props.posts, post=> {
             return (
-                <li className="collection-item" key={post.id}>
-                    {post.text}
-                </li>
+                <div className="col s3 l4" key={post.id}>
+                    <div className="card">
+                        <div className="card-image">
+                            <img src="img/exam.png"></img>
+                            <span className="card-title black-text">{post.text}</span>
+                        </div>
+                        <div className="card-content">
+                            <p>I am a very simple card. I am good at containing small bits of information.
+                                I am convenient because I require little markup to use effectively.
+                            </p>
+                        </div>
+                        <div className="card-action">
+                            <a href="#">This is a link</a>
+                        </div>
+                    </div>
+                </div>
             );
         });
     }
@@ -22,10 +35,9 @@ class Exams extends Component {
     render() {
         return (
             <div className = "container">
-                <h4 className="center">Exams</h4>
-                <ul className="collection">
+                <div className="row">
                     {this.renderPosts()}
-                </ul>
+                </div>
             </div>
         );
     }
