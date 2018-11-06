@@ -29,3 +29,15 @@ export function createPost(values) {
         payload: request
     };
 }
+
+export function createExam(state, values) {
+    values = Object.assign({subject_id: "ddb19e1b-5fb9-408b-83dc-cf3b7dd701f2"}, values);
+    state.exam = values;
+    state = JSON.stringify(state);
+    console.log(state);
+    const request = axios.get(`${ROOT}/exams/${5}`, state);
+    return {
+        type: CREATE_POST,
+        payload: request
+    };
+}

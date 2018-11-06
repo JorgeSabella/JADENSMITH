@@ -2,9 +2,12 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { fetchPreguntas } from '../../store/actions';
+import { fetchPreguntas, createExam } from '../../store/actions';
 
 class NewExam extends Component {
+    state = {
+        exam: ''
+    }
 
     componentDidMount() {
         this.props.fetchPreguntas();
@@ -22,7 +25,7 @@ class NewExam extends Component {
 
     renderField(field) {
         return (
-            <div classNam="input-field">
+            <div className="input-field">
                 <label>{field.label}</label>
                 <input
                     type="text"
@@ -33,18 +36,15 @@ class NewExam extends Component {
     }
 
     onSubmit(values) {
-        const sub = values.materia;
-        const post =  
-        {
-            "subject": {
-                "text": sub
-            }
-        };
-        this.props.createPost(post);
-    }
-
-    onClick() {
-        console.log("click");
+        // const sub = values.materia;
+        // const post =  
+        // {
+        //     "subject": {
+        //         "text": sub
+        //     }
+        // };
+        // this.props.createPost(post);
+        this.props.createExam(Object.assign({}, this.state), values);
     }
 
     render() {
@@ -53,16 +53,18 @@ class NewExam extends Component {
             <div className= "container">
                 <form className = "white" onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                     <h5 className = "grey-text text-darken-4">Crear examen</h5>
-                    <Field label="Nombre" name="examName" component={this.renderField}/>
-                    <Field label="Institucion" name="insti" component={this.renderField}/>
-                    <Field label="Profesor" name="prof" component={this.renderField}/>
+                    <Field label="Nombre" name="Name" component={this.renderField}/>
+                    <Field label="Institucion" name="institution" component={this.renderField}/>
+                    <Field label="Profesor" name="Professor" component={this.renderField}/>
+                    {/*
                     <Field label="Tema" name="tema" component={this.renderField}/>
                     <Field label="Nombre Alumno" name="nombreAlumno" component={this.renderField}/>
+                    */}
                     <h5 className = "grey-text text-darken-2">Preguntas</h5>
                     {this.renderPosts()}
                     <button className = "btn pink lighten-1 z-depth-0" type="submit">Crear</button>
-                    <button className = "btn pink lighten-1 z-depth-0" type="submit">Borrar</button>
-                    <button className = "btn pink lighten-1 z-depth-0" type="submit">Preview</button>
+                    <button className = "btn pink lighten-1 z-depth-0" type="click">Borrar</button>
+                    <button className = "btn pink lighten-1 z-depth-0" type="click">Preview</button>
                 </form>
             </div>
         );
@@ -81,12 +83,15 @@ function validate(values) {
 }
 
 function mapStateToProps(state) {
-    return { posts: state.posts };
+    return { 
+        posts: state.posts
+    };
 }
 
 
 export default reduxForm({
+    validate,
     form: 'PostNewExam'
 })(
-    connect(mapStateToProps, { fetchPreguntas })(NewExam)
+    connect(mapStateToProps, { fetchPreguntas, createExam })(NewExam)
 );
