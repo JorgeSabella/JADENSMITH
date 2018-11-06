@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Navbar from './components/Navbar';
+import Navbar from './components/layout/Navbar';
 import { BrowserRouter, Route } from 'react-router-dom';
-import Home from './components/Home';
-import Exams from './components/Exams';
-import NewExam from './components/NewExam';
-import Question from './components/Question';
+import Home from './components/dashboard/Home';
+import Exams from './components/dashboard/ViewExams';
+import NewExam from './components/exams/NewExam';
+import Question from './components/exams/Question';
 
 class App extends Component {
   render() {

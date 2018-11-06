@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { createPost } from '../actions';
+import { createPost } from '../../store/actions';
 
 class Question extends Component {
 

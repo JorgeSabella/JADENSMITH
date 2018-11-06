@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { fetchPreguntas } from '../actions';
+import { fetchPreguntas } from '../../store/actions';
 
 class NewExam extends Component {
 
