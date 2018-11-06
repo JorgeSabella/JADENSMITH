@@ -16,10 +16,10 @@ const Navbar = () => {
                             </div>
                         </div>
                     </li>
-                    <li><Link to="/" className="text-white">Home</Link></li>
-                    <li><NavLink to="/exams" className="text-white">Exams</NavLink></li>
-                    <li><NavLink to="/newexam" className="text-white">Create Exam</NavLink></li>
-                    <li><NavLink to="/question" className="text-white">New Question</NavLink></li>
+                    <li><NavLink to="/" className="text-white"><i className="material-icons">home</i>Home</NavLink></li>
+                    <li><NavLink to="/exams" className="text-white"><i className="material-icons">folder</i>Exams</NavLink></li>
+                    <li><NavLink to="/newexam" className="text-white"><i className="material-icons">edit</i>Create Exam</NavLink></li>
+                    <li><NavLink to="/question" className="text-white"><i className="material-icons">add</i>New Question</NavLink></li>
                 </ul>
             </nav>
             <a className="top-nav sidenav-trigger full hide-on-large-only" href="#" data-target="slide-out">
