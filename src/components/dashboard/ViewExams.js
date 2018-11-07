@@ -13,7 +13,7 @@ class Exams extends Component {
         return _.map(this.props.posts, post=> {
             return (
                 <div className="col s3 l4" key={post.id}>
-                    <div className="card">
+                    <div className="card hoverable">
                         <div className="card-image">
                             <img src="img/exam.png"></img>
                             <span className="card-title black-text">{post.text}</span>
