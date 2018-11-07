@@ -16,9 +16,19 @@ class NewExam extends Component {
     renderPosts() {
         return _.map(this.props.posts, post=> {
             return (
-                <li className="collection-item" key={post.id}>
-                    {post.text}
-                </li>
+                <div class="card horizontal" key={post.id}>
+                  <div class="card-image">
+                    <img src="img/question.png" className="responsive-img"/>
+                  </div>
+                  <div class="card-stacked">
+                    <div class="card-content">
+                      <p>{post.text}</p>
+                    </div>
+                    <div class="card-action">
+                      <a href="#">This is a link</a>
+                    </div>
+                  </div>
+                </div>
             );
         });
     }
@@ -52,16 +62,21 @@ class NewExam extends Component {
         return (
             <div className= "container">
                 <form className = "white" onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-                    <h5 className = "grey-text text-darken-4">Crear examen</h5>
-                    <Field label="Nombre" name="Name" component={this.renderField}/>
-                    <Field label="Institucion" name="institution" component={this.renderField}/>
-                    <Field label="Profesor" name="Professor" component={this.renderField}/>
-                    {/*
-                    <Field label="Tema" name="tema" component={this.renderField}/>
-                    <Field label="Nombre Alumno" name="nombreAlumno" component={this.renderField}/>
-                    */}
-                    <h5 className = "grey-text text-darken-2">Preguntas</h5>
-                    {this.renderPosts()}
+                    <div className="section">
+                        <h5 className = "grey-text text-darken-4">Crear examen</h5>
+                        <Field label="Nombre" name="Name" component={this.renderField}/>
+                        <Field label="Institucion" name="institution" component={this.renderField}/>
+                        <Field label="Profesor" name="Professor" component={this.renderField}/>
+                        <div className="divider"/>
+                        {/*
+                        <Field label="Tema" name="tema" component={this.renderField}/>
+                        <Field label="Nombre Alumno" name="nombreAlumno" component={this.renderField}/>
+                        */}
+                    </div>
+                    <div className="section">
+                        <h5 className = "grey-text text-darken-2">Preguntas</h5>
+                        {this.renderPosts()}
+                    </div>
                     <button className = "btn pink lighten-1 z-depth-0" type="submit">Crear</button>
                     <button className = "btn pink lighten-1 z-depth-0" type="click">Borrar</button>
                     <button className = "btn pink lighten-1 z-depth-0" type="click">Preview</button>
