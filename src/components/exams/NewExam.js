@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { fetchPreguntas, createExam } from '../../store/actions';
+import { fetchPreguntas } from '../../store/actions';
 
 class NewExam extends Component {
     state = {
@@ -11,6 +11,10 @@ class NewExam extends Component {
 
     componentDidMount() {
         this.props.fetchPreguntas();
+    }
+
+    sendQuestion(e, param) {
+        console.log("param",param)
     }
 
     renderPosts() {
@@ -26,6 +30,7 @@ class NewExam extends Component {
                     </div>
                     <div class="card-action">
                       <a href="#">This is a link</a>
+                      <button onClick={(e) => {this.sendQuestion(e, post)}}>Click Me!</button>
                     </div>
                   </div>
                 </div>
@@ -54,7 +59,7 @@ class NewExam extends Component {
         //     }
         // };
         // this.props.createPost(post);
-        this.props.createExam(Object.assign({}, this.state), values);
+        // this.props.createExam(Object.assign({}, this.state), values);
     }
 
     render() {
@@ -108,5 +113,5 @@ export default reduxForm({
     validate,
     form: 'PostNewExam'
 })(
-    connect(mapStateToProps, { fetchPreguntas, createExam })(NewExam)
+    connect(mapStateToProps, { fetchPreguntas })(NewExam)
 );
