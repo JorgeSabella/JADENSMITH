@@ -14,7 +14,7 @@ const Navbar = () => {
                     <i className="material-icons white-text">menu</i>
                 </a>
             </nav>
-            <ul className="sidenav grey darken-4 sidenav-fixed" id="slide-out">
+            <ul className="sidenav grey darken-4 sidenav-fixed z-depth-3" id="slide-out">
                 <li>
                     <div className="user-view center">
                         <div>
