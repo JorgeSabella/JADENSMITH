@@ -8,7 +8,7 @@ const Navbar = () => {
                 <div className="nav-wrapper">
                     <div className="container">
                         <a className="brand-logo left" href="#"><span className="black-text">Jaden Smith</span></a>
-                        <a href="#!" className="right"><i className="material-iconsblack-text">help</i></a>
+                        <a href="#!" className="right"><i className="large material-icons black-text">help</i></a>
                     </div>
                 </div>
                 <a className="top-nav sidenav-trigger full hide-on-large-only" href="#" data-target="slide-out">
