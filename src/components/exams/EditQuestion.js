@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { createPost } from '../../store/actions';
 
-class Question extends Component {
+class EditQuestion extends Component {
 
     renderTextField(field) {
         return (
@@ -41,7 +41,7 @@ class Question extends Component {
         return (
             <div className="container">
                 <form className="white" onSubmit={ handleSubmit }>
-                    <Field label="Temsasa" name="tema" component={this.renderTextField} type="text"/>
+                    <Field label="Tema" name="tema" component={this.renderTextField} type="text"/>
                     <Field label="Nombre" name="nombre" component={this.renderTextField} type="text"/>
                     <Field label="Tema" name="descripcion" component={this.renderTextField} type="text"/>
                     <div>
@@ -69,7 +69,7 @@ function validate(values) {
 
 export default reduxForm({
     validate,
-    form: 'id'
+    form: 'EditQuestionForm'
 })(
-    connect(null, { createPost })(Question)
+    connect(null, { createPost })(EditQuestion)
 );
