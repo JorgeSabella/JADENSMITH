@@ -2,9 +2,18 @@ import axios from 'axios';
 
 export const FETCH_POSTS = 'fetch_posts';
 export const CREATE_POST = 'create_post';
+export const QUESTION_DATA = 'question_data';
 
 const ROOT_URL = 'https://jsonplaceholder.typicode.com'
 const ROOT = 'https://mejorado.herokuapp.com'
+
+export function questionData(param) {
+    console.log("action",param)
+    return {
+        type: QUESTION_DATA,
+        payload: param
+    }
+}
 
 export function fetchPosts() {
     const request = axios.get(`${ROOT}/subjects`);

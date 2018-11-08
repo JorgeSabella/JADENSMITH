@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { fetchPreguntas } from '../../store/actions';
+import { fetchPreguntas, questionData } from '../../store/actions';
 
 class NewExam extends Component {
     state = {
@@ -14,7 +14,9 @@ class NewExam extends Component {
     }
 
     sendQuestion(e, param) {
-        console.log("param",param)
+        console.log("param",param);
+        this.props.questionData(param);
+        this.props.history.push('/question/edit');
     }
 
     renderPosts() {
@@ -30,7 +32,7 @@ class NewExam extends Component {
                     </div>
                     <div class="card-action">
                       <a href="#">This is a link</a>
-                      <button onClick={(e) => {this.sendQuestion(e, post)}}>Click Me!</button>
+                      <button onClick={(e) => {this.sendQuestion(e, post)}}>Edit</button>
                     </div>
                   </div>
                 </div>
@@ -108,10 +110,15 @@ function mapStateToProps(state) {
     };
 }
 
+const mapDispatchToProps = dispatch => ({
+    fetchPreguntas: () => dispatch(fetchPreguntas()),
+    questionData: (payload) => dispatch(questionData(payload))
+})
+
 
 export default reduxForm({
     validate,
     form: 'PostNewExam'
 })(
-    connect(mapStateToProps, { fetchPreguntas })(NewExam)
+    connect(mapStateToProps, mapDispatchToProps)(NewExam)
 );

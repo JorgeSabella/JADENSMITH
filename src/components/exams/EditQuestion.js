@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { createPost } from '../../store/actions';
 
-class Question extends Component {
+class EditQuestion extends Component {
 
     renderTextField(field) {
         return (
@@ -37,24 +37,28 @@ class Question extends Component {
     }
 
     render() {
-        const { handleSubmit } = this.props;
+        const { handleSubmit, qdata } = this.props;
+        console.log("EDIT", qdata);
         return (
             <div className="container">
                 <form className="white" onSubmit={ handleSubmit }>
-                    <Field label="Tema" name="tema" component={this.renderTextField} type="text"/>
-                    <Field label="Nombre" name="nombre" component={this.renderTextField} type="text"/>
-                    <Field label="Tema" name="descripcion" component={this.renderTextField} type="text"/>
-                    <div>
-                        <label>Pregunta</label>
-                        <div>
-                            <Field label="Tema" name="pregunta" component="textarea" type="text"/>
-                        </div>
+                    <div className="fields">
+                        <Field label="Tema" name="tema" component={this.renderTextField} type="text"/>
                     </div>
-                    <label>Respuestas</label>
-                    <Field label="op1" name="group" component={this.renderRadioField} type="text"/>
-                    <Field label="op2" name="group" component={this.renderRadioField} type="radio"/>
-                    <Field label="op3" name="group" component={this.renderRadioField} type="radio"/>
-                    <Field label="op4" name="group" component={this.renderRadioField} type="radio"/>
+                        <Field label="Nombre" name="nombre" component={this.renderTextField} type="text"/>
+                        <Field label="Tema" name="descripcion" component={this.renderTextField} type="text"/>
+                        <div>
+                            <label>Pregunta</label>
+                            <div>
+                                <Field label="Tema" name="pregunta" component="textarea" type="text"/>
+                            </div>
+                        </div>
+                        <label>Respuestas</label>
+                        <Field label="op1" name="group" component={this.renderRadioField} type="text"/>
+                        <Field label="op2" name="group" component={this.renderRadioField} type="radio"/>
+                        <Field label="op3" name="group" component={this.renderRadioField} type="radio"/>
+                        <Field label="op4" name="group" component={this.renderRadioField} type="radio"/>
+                    
                     <button className="btn btn-primary" type = "submit">Guardar</button>
                 </form>
             </div>
@@ -67,9 +71,20 @@ function validate(values) {
     return errors;
 }
 
+function mapStateToProps(state) {
+    console.log(state);
+    return { 
+        qdata: state.posts
+    };
+}
+
 export default reduxForm({
     validate,
-    form: 'EditQuestionForm'
+    form: 'PostQuestionForm',
+    initialValues: {
+            tema: "myFirstName"
+      }
+
 })(
-    connect(null, { createPost })(Question)
+    connect(mapStateToProps, { createPost })(EditQuestion)
 );
