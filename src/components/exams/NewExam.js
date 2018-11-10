@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { fetchPreguntas, questionData } from '../../store/actions';
+import { fetchQuestions, questionData } from '../../store/actions';
 
 class NewExam extends Component {
     state = {
@@ -10,11 +10,10 @@ class NewExam extends Component {
     }
 
     componentDidMount() {
-        this.props.fetchPreguntas();
+        this.props.fetchQuestions();
     }
 
     sendQuestion(e, param) {
-        console.log("param",param);
         this.props.questionData(param);
         this.props.history.push('/question/edit');
     }
@@ -22,15 +21,15 @@ class NewExam extends Component {
     renderPosts() {
         return _.map(this.props.posts, post=> {
             return (
-                <div class="card horizontal" key={post.id}>
-                  <div class="card-image">
+                <div className="card horizontal" key={post.id}>
+                  <div className="card-image">
                     <img src="img/question.png" className="responsive-img"/>
                   </div>
-                  <div class="card-stacked">
-                    <div class="card-content">
+                  <div className="card-stacked">
+                    <div className="card-content">
                       <p>{post.text}</p>
                     </div>
-                    <div class="card-action">
+                    <div className="card-action">
                       <a href="#">This is a link</a>
                       <button onClick={(e) => {this.sendQuestion(e, post)}}>Edit</button>
                     </div>
@@ -111,7 +110,7 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = dispatch => ({
-    fetchPreguntas: () => dispatch(fetchPreguntas()),
+    fetchQuestions: () => dispatch(fetchQuestions()),
     questionData: (payload) => dispatch(questionData(payload))
 })
 

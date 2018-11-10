@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { createPost } from '../../store/actions';
 
 class EditQuestion extends Component {
 
@@ -40,7 +39,6 @@ class EditQuestion extends Component {
 
     render() {
         const { handleSubmit, question } = this.props;
-        // console.log("EDIT", question);
         return (
             <div className="container">
                 <form className="white" onSubmit={ handleSubmit }>
@@ -87,5 +85,5 @@ export default reduxForm({
       }
 
 })(
-    connect(mapStateToProps, { createPost })(EditQuestion)
+    connect(mapStateToProps, null)(EditQuestion)
 );
