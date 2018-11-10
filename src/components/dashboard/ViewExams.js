@@ -1,12 +1,12 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPosts } from '../../store/actions';
+import { fetchExams } from '../../store/actions';
 
 class Exams extends Component {
 
     componentDidMount() {
-        this.props.fetchPosts();
+        this.props.fetchExams();
     }
 
     renderPosts() {
@@ -66,4 +66,4 @@ function mapStateToProps(state) {
     return { posts: state.posts };
 }
 
-export default connect(mapStateToProps, { fetchPosts })(Exams);
+export default connect(mapStateToProps, { fetchExams })(Exams);

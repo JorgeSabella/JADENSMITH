@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { createPost } from '../../store/actions';
 
 class Question extends Component {
 
@@ -73,5 +72,5 @@ export default reduxForm({
     validate,
     form: 'PostQuestionForm'
 })(
-    connect(null, { createPost })(Question)
+    connect(null, null)(Question)
 );
