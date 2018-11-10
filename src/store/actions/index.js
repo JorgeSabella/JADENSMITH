@@ -8,7 +8,6 @@ const ROOT_URL = 'https://jsonplaceholder.typicode.com'
 const ROOT = 'https://mejorado.herokuapp.com'
 
 export function questionData(param) {
-    console.log("action",param)
     return {
         type: QUESTION_DATA,
         payload: param
@@ -50,3 +49,10 @@ export function createPost(values) {
 //         payload: request
 //     };
 // }
+
+
+// TODO 
+// updateExam()
+
+// TODO 
+// updateQuestion()

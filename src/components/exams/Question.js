@@ -36,6 +36,8 @@ class Question extends Component {
         );
     }
 
+    // TODO onSubmit()
+
     render() {
         const { handleSubmit } = this.props;
         return (
@@ -69,7 +71,7 @@ function validate(values) {
 
 export default reduxForm({
     validate,
-    form: 'EditQuestionForm'
+    form: 'PostQuestionForm'
 })(
     connect(null, { createPost })(Question)
 );

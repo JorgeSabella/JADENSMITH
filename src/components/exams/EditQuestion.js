@@ -36,9 +36,11 @@ class EditQuestion extends Component {
         );
     }
 
+    // TODO onSubmit()
+
     render() {
-        const { handleSubmit, qdata } = this.props;
-        console.log("EDIT", qdata);
+        const { handleSubmit, question } = this.props;
+        // console.log("EDIT", question);
         return (
             <div className="container">
                 <form className="white" onSubmit={ handleSubmit }>
@@ -72,15 +74,14 @@ function validate(values) {
 }
 
 function mapStateToProps(state) {
-    console.log(state);
     return { 
-        qdata: state.posts
+        question: state.posts
     };
 }
 
 export default reduxForm({
     validate,
-    form: 'PostQuestionForm',
+    form: 'EditQuestionForm',
     initialValues: {
             tema: "myFirstName"
       }

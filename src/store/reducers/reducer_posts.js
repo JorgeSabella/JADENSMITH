@@ -6,7 +6,6 @@ export default function(state = {}, action) {
         case FETCH_POSTS:
             return _.mapKeys(action.payload.data, 'id');
         case QUESTION_DATA:
-            console.log("action",action);
             return action.payload;
         default:
             return state;
