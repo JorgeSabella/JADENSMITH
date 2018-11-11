@@ -5,17 +5,11 @@ export const CREATE_SUBJECT = 'create_subject';
 export const QUESTION_DATA = 'question_data';
 export const FETCH_QUESTIONS = 'fetch_questions';
 export const CREATE_QUESTION = 'create_question';
+export const CREATE_EXAM = "create_exam";
 export const FETCH_EXAMS = 'fetch_exams';
 
 //const ROOT_URL = 'https://jsonplaceholder.typicode.com'
 const ROOT = 'https://mejorado.herokuapp.com'
-
-export function questionData(param) {
-    return {
-        type: QUESTION_DATA,
-        payload: param
-    }
-}
 
 export function fetchSubjects() {
     const request = axios.get(`${ROOT}/subjects`);
@@ -57,18 +51,14 @@ export function fetchExams() {
     };
 }
 
-// export function createExam(state, values) {
-//     values = Object.assign({subject_id: "ddb19e1b-5fb9-408b-83dc-cf3b7dd701f2"}, values);
-//     state.exam = values;
-//     state = JSON.stringify(state);
-//     console.log(state);
-//     const request = axios.get(`${ROOT}/exams/${5}`, state);
-//     return {
-//         type: CREATE_POST,
-//         payload: request
-//     };
-// }
-
+export function createExam(values) {
+    console.log("values in actions", values)
+    const request = axios.post(`${ROOT}/exams`, values);
+    return {
+        type: CREATE_EXAM,
+        payload: request
+    };
+}
 
 // TODO 
 // updateExam()

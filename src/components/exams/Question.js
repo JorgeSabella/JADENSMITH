@@ -44,7 +44,6 @@ class Question extends Component {
                 <form className="white" onSubmit={ handleSubmit }>
                     <Field label="Tema" name="tema" component={this.renderTextField} type="text"/>
                     <Field label="Nombre" name="nombre" component={this.renderTextField} type="text"/>
-                    <Field label="Tema" name="descripcion" component={this.renderTextField} type="text"/>
                     <div>
                         <label>Pregunta</label>
                         <div>
