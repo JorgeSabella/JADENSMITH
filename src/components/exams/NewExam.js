@@ -13,47 +13,6 @@ class NewExam extends Component {
         this.props.fetchSubjects();
     }
 
-    sendQuestion(e, param) {
-        this.props.questionData(param);
-        this.props.history.push('/question/edit');
-    }
-
-    renderMaterias() {
-        const { posts } = this.props.posts;
-        if (posts) {
-            return _.map(posts, post => {
-                return (
-                    <option  key={post.id} value={post.text}>{post.text}</option>
-                );
-            });
-        } else {
-            return (
-                <option  value="1">cargando</option>
-            )
-        }
-    }
-
-    renderPosts() {
-        return _.map(this.props.posts, post=> {
-            return (
-                <div className="card horizontal" key={post.id}>
-                  <div className="card-image">
-                    <img src="img/question.png" className="responsive-img"/>
-                  </div>
-                  <div className="card-stacked">
-                    <div className="card-content">
-                      <p>{post.text}</p>
-                    </div>
-                    <div className="card-action">
-                      <a href="#">This is a link</a>
-                      <button onClick={(e) => {this.sendQuestion(e, post)}}>Edit</button>
-                    </div>
-                  </div>
-                </div>
-            );
-        });
-    }
-
     renderField(field) {
         return (
             <div className="input-field">
@@ -116,11 +75,6 @@ function mapStateToProps(state) {
         posts: state.posts
     };
 }
-
-const mapDispatchToProps = dispatch => ({
-    fetchSubjects: () => dispatch(fetchSubjects())
-})
-
 
 export default reduxForm({
     validate,
