@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 
+
 class EditQuestion extends Component {
 
     renderTextField(field) {
@@ -38,7 +39,8 @@ class EditQuestion extends Component {
     // TODO onSubmit()
 
     render() {
-        const { handleSubmit, question } = this.props;
+        const { handleSubmit, qdata } = this.props;
+        console.log("in edit quesiton", qdata);
         return (
             <div className="container">
                 <form className="white" onSubmit={ handleSubmit }>
@@ -73,7 +75,7 @@ function validate(values) {
 
 function mapStateToProps(state) {
     return { 
-        question: state.posts
+        qdata: state.data
     };
 }
 

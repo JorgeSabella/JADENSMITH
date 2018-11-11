@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export const FETCH_SUBJECTS = 'fetch_subjects';
+export const FETCH_SUBJECT = 'fetch_subject';
 export const CREATE_SUBJECT = 'create_subject';
 export const QUESTION_DATA = 'question_data';
 export const FETCH_QUESTIONS = 'fetch_questions';
@@ -10,6 +11,14 @@ export const FETCH_EXAMS = 'fetch_exams';
 
 //const ROOT_URL = 'https://jsonplaceholder.typicode.com'
 const ROOT = 'https://mejorado.herokuapp.com'
+
+export function fetchSubject(id) {
+    const request = axios.get(`${ROOT}/subjects/${id}`);
+    return {
+        type: FETCH_SUBJECT,
+        payload: request
+    }
+}
 
 export function fetchSubjects() {
     const request = axios.get(`${ROOT}/subjects`);

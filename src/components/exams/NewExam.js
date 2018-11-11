@@ -8,7 +8,6 @@ import {
 } from '../../store/actions/index';
 
 class NewExam extends Component {
-
     componentDidMount() {
         this.props.fetchSubjects();
     }
