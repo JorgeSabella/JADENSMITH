@@ -6,6 +6,9 @@ import { fetchExams } from '../../store/actions/index';
 import { sendExamData } from '../../store/actions/dataActions';
 
 class Exams extends Component {
+    // componentWillMount() {
+    //     this.props.fetchExams();
+    // }
 
     componentDidMount() {
         this.props.fetchExams();
@@ -17,14 +20,15 @@ class Exams extends Component {
 
     renderPosts() {
         const { posts } = this.props;
-        if(!_.isEmpty(posts)) {
+        console.log("in view exmas", posts);
+        if(posts) {
             return _.map(posts, post=> {
                 return (
                     <div className="col s3 l4" key={post.id}>
                         <div className="card hoverable">
                             <div className="card-image">
                                 <img src="img/exam.png"></img>
-                                <span className="card-title black-text">{post.text}</span>
+                                <span className="card-title black-text">{post.name}</span>
                                 <NavLink to="/exam/edit" className="white-text">
                                     <a className="btn-floating halfway-fab waves-effect waves-light blue darken-3"
                                     onClick={() => this.sendData(post)}
