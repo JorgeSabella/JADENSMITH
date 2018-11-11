@@ -4,7 +4,7 @@ import {
     QUESTION_DATA, 
     FETCH_EXAMS,
     FETCH_QUESTIONS
-} from '../actions';
+} from '../actions/index';
 
 export default function(state = {}, action) {
     switch (action.type) {

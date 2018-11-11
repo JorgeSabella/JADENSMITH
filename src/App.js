@@ -6,6 +6,7 @@ import Exams from './components/dashboard/ViewExams';
 import NewExam from './components/exams/NewExam';
 import Question from './components/exams/Question';
 import EditQuestion from './components/exams/EditQuestion';
+import EditExam from './components/exams/EditExam';
 
 class App extends Component {
   render() {
@@ -19,6 +20,7 @@ class App extends Component {
             <Switch>
               <Route path='/exams' component = {Exams} />
               <Route path='/newexam' component = {NewExam} />
+              <Route path='/exam/edit' component = {EditExam} />
               <Route path='/question/edit' component = {EditQuestion} />
               <Route exact path='/question' component = {Question} />
               <Route exact path='/' component = {Home}/>

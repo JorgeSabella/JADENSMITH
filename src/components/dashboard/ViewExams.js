@@ -1,12 +1,18 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchExams } from '../../store/actions';
+import { fetchExams } from '../../store/actions/index';
+import { sendExamData } from '../../store/actions/dataActions';
 
 class Exams extends Component {
 
     componentDidMount() {
         this.props.fetchExams();
+    }
+
+    sendData(post) {
+        this.props.sendExamData(post);
     }
 
     renderPosts() {
@@ -19,6 +25,13 @@ class Exams extends Component {
                             <div className="card-image">
                                 <img src="img/exam.png"></img>
                                 <span className="card-title black-text">{post.text}</span>
+                                <NavLink to="/exam/edit" className="white-text">
+                                    <a className="btn-floating halfway-fab waves-effect waves-light blue darken-3"
+                                    onClick={() => this.sendData(post)}
+                                    >
+                                        <i class="material-icons">edit</i>
+                                    </a>
+                                </NavLink>
                             </div>
                             <div className="card-content">
                                 <p>I am a very simple card. I am good at containing small bits of information.
@@ -66,4 +79,4 @@ function mapStateToProps(state) {
     return { posts: state.posts };
 }
 
-export default connect(mapStateToProps, { fetchExams })(Exams);
+export default connect(mapStateToProps, { fetchExams, sendExamData })(Exams);
