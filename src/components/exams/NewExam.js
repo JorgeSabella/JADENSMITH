@@ -2,20 +2,35 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { fetchQuestions, questionData } from '../../store/actions';
+import { 
+    fetchSubjects,
+    createExam
+} from '../../store/actions';
 
 class NewExam extends Component {
-    state = {
-        exam: ''
-    }
 
     componentDidMount() {
-        this.props.fetchQuestions();
+        this.props.fetchSubjects();
     }
 
     sendQuestion(e, param) {
         this.props.questionData(param);
         this.props.history.push('/question/edit');
+    }
+
+    renderMaterias() {
+        const { posts } = this.props.posts;
+        if (posts) {
+            return _.map(posts, post => {
+                return (
+                    <option  key={post.id} value={post.text}>{post.text}</option>
+                );
+            });
+        } else {
+            return (
+                <option  value="1">cargando</option>
+            )
+        }
     }
 
     renderPosts() {
@@ -52,40 +67,39 @@ class NewExam extends Component {
     }
 
     onSubmit(values) {
-        // const sub = values.materia;
-        // const post =  
-        // {
-        //     "subject": {
-        //         "text": sub
-        //     }
-        // };
-        // this.props.createPost(post);
-        // this.props.createExam(Object.assign({}, this.state), values);
+        const body =  {
+            exam:{
+                subject_id: document.getElementById("item").value,
+                name: values.nombre,
+                institution: values.institut,
+                professor: values.profesor
+            }
+        };
+        this.props.createExam(body);
     }
 
     render() {
-        const { handleSubmit } = this.props;
+        const { handleSubmit, posts } = this.props;
         return (
             <div className= "container">
                 <form className = "white" onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                     <div className="section">
                         <h5 className = "grey-text text-darken-4">Crear examen</h5>
-                        <Field label="Nombre" name="Name" component={this.renderField}/>
-                        <Field label="Institucion" name="institution" component={this.renderField}/>
-                        <Field label="Profesor" name="Professor" component={this.renderField}/>
-                        <div className="divider"/>
+                        <Field label="Nombre del examen" name="nombre" component={this.renderField}/>
+                        <Field label="Institucion" name="institut" component={this.renderField}/>
+                        <Field label="Profesor" name="profesor" component={this.renderField}/>
+                        <select className='browser-default' id="item">
+                            {_.map(posts, function (option) {
+                                return (
+                                <option value={option.id} key={option.id}>{option.text}</option>
+                                );
+                            })}
+                        </select>
                         {/*
-                        <Field label="Tema" name="tema" component={this.renderField}/>
                         <Field label="Nombre Alumno" name="nombreAlumno" component={this.renderField}/>
                         */}
                     </div>
-                    <div className="section">
-                        <h5 className = "grey-text text-darken-2">Preguntas</h5>
-                        {this.renderPosts()}
-                    </div>
                     <button className = "btn pink lighten-1 z-depth-0" type="submit">Crear</button>
-                    <button className = "btn pink lighten-1 z-depth-0" type="click">Borrar</button>
-                    <button className = "btn pink lighten-1 z-depth-0" type="click">Preview</button>
                 </form>
             </div>
         );
@@ -94,12 +108,6 @@ class NewExam extends Component {
 
 function validate(values) {
     const errors = {};
-    // if (!values.materia) {
-    //     errors.title = "Enter a title"
-    // }
-    // if (!values) {
-    //     errors.categories = "Enter some ca"
-    // }
     return errors;
 }
 
@@ -110,8 +118,7 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = dispatch => ({
-    fetchQuestions: () => dispatch(fetchQuestions()),
-    questionData: (payload) => dispatch(questionData(payload))
+    fetchSubjects: () => dispatch(fetchSubjects())
 })
 
 
@@ -119,5 +126,5 @@ export default reduxForm({
     validate,
     form: 'PostNewExam'
 })(
-    connect(mapStateToProps, mapDispatchToProps)(NewExam)
+    connect(mapStateToProps, {fetchSubjects, createExam})(NewExam)
 );
