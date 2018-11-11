@@ -10,6 +10,7 @@ export const EXAM_DATA = 'exam_data';
 
 //const ROOT_URL = 'https://jsonplaceholder.typicode.com'
 const ROOT = 'https://raw.githubusercontent.com/acevedodavid/fakeJson/master/'
+//const ROOT = 'https://mejorado.herokuapp.com'
 
 export function questionData(param) {
     return {

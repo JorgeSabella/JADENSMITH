@@ -6,7 +6,7 @@ import { examData } from '../../store/actions';
 
 class TestPDF extends Component {
     
-    state = {"subject":"Mate","name":"Parcial 1","institution":"Tec de Monterrey","professor":"Mejorado","text_fields":[{"key":"Nombre: ","body":null}],"questions":[{"name":"Factorizacion","text":"Factoriza el pedo ilv","tipo":1,"equation":"(2x + 4x^2)","answers":[{"correct":true,"tipo":1,"text":null,"equation":"2x(1+2x)"}]}]}
+    /*state = {"subject":"Mate","name":"Parcial 1","institution":"Tec de Monterrey","professor":"Mejorado","text_fields":[{"key":"Nombre: ","body":null}],"questions":[{"name":"Factorizacion","text":"Factoriza el pedo ilv","tipo":1,"equation":"(2x + 4x^2)","answers":[{"correct":true,"tipo":1,"text":null,"equation":"2x(1+2x)"}]}]} */
     
     
     componentDidMount() {
@@ -14,15 +14,27 @@ class TestPDF extends Component {
     }
 
     render() {
-        const { posts } = this.props;
-        return _.map(posts, post=> {
+        const { exams } = this.props;
+        /*return _.map(questions.undefined, question => {
+            return (
+                <div className="question" key={question.name}>
+                    <div> {question.name} </div>
+                </div>
+            )
+        })*/
         return (
             <div className="container">
-                    <button onClick={createPDF(this.state)} className="btn btn-primary" >Guardar</button>
+                    <button onClick={createPDF} className="btn btn-primary" >Guardar</button>
+            </div>
+        );
+        /*return _.map(examData, post=> {
+        return (
+            <div className="container">
+                    <button onClick={createPDF} className="btn btn-primary" >Guardar</button>
                     <p>{post.subject}</p>
             </div>
         );
-        });
+        }); */
     }
 }
 
@@ -31,14 +43,15 @@ class TestPDF extends Component {
 
 
 /////////////////////////////////////HI PDF////////////////////////////////////
-    var doc = new jsPDF('p','pt','letter') //orientation (portrait), unit for coordinates (pt points), format/size of first page (letter)
-    //Letter size: 612 × 792 points
-    // 1 inch margin = 72 points
-    var x = 72
-    var y = 72
-    var font_size = 12
-    var line_spacing = 1.5
-    var jump = font_size * line_spacing
+var doc = new jsPDF('p','pt','letter') //orientation (portrait), unit for coordinates (pt points), format/size of first page (letter)
+//Letter size: 612 × 792 points
+// 1 inch margin = 72 points
+var x = 72
+var y = 72
+var font_size = 12
+var line_spacing = 1.5
+var jump = font_size * line_spacing
+
 function nextLine () {
     if (y > 720) {
         doc.addPage()
@@ -128,7 +141,9 @@ function createPDF () {
 ///////////////////////////////////////BYE PDF/////////////////////////////////
 
 function mapStateToProps(state) {
-    return { posts : state.posts };
+    return { 
+        exams : state.posts
+    };
 }
 
 export default connect(mapStateToProps, { examData })(TestPDF);

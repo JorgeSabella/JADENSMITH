@@ -16,7 +16,7 @@ export default function(state = {}, action) {
         case FETCH_EXAMS:
             return _.mapKeys(action.payload.data, 'id');
         case EXAM_DATA:
-            return _.mapKeys(action.payload.data, 'subject');
+            return _.mapKeys(action.payload.data, 'id');
         case QUESTION_DATA:
             return action.payload;
         default:
