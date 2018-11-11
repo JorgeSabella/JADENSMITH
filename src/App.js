@@ -6,6 +6,7 @@ import Exams from './components/dashboard/ViewExams';
 import NewExam from './components/exams/NewExam';
 import Question from './components/exams/Question';
 import EditQuestion from './components/exams/EditQuestion';
+import TestPDF from './components/testPDF/TestPDF';
 
 class App extends Component {
   render() {
@@ -21,6 +22,7 @@ class App extends Component {
               <Route path='/newexam' component = {NewExam} />
               <Route path='/question/edit' component = {EditQuestion} />
               <Route exact path='/question' component = {Question} />
+              <Route path='/testPDF' component = {TestPDF} />
               <Route exact path='/' component = {Home}/>
             </Switch>
           </main>

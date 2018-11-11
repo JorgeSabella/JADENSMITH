@@ -3,7 +3,8 @@ import {
     FETCH_SUBJECTS, 
     QUESTION_DATA, 
     FETCH_EXAMS,
-    FETCH_QUESTIONS
+    FETCH_QUESTIONS,
+    EXAM_DATA
 } from '../actions';
 
 export default function(state = {}, action) {
@@ -14,6 +15,8 @@ export default function(state = {}, action) {
             return _.mapKeys(action.payload.data, 'id');
         case FETCH_EXAMS:
             return _.mapKeys(action.payload.data, 'id');
+        case EXAM_DATA:
+            return _.mapKeys(action.payload.data, 'subject');
         case QUESTION_DATA:
             return action.payload;
         default:

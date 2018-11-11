@@ -6,9 +6,10 @@ export const QUESTION_DATA = 'question_data';
 export const FETCH_QUESTIONS = 'fetch_questions';
 export const CREATE_QUESTION = 'create_question';
 export const FETCH_EXAMS = 'fetch_exams';
+export const EXAM_DATA = 'exam_data';
 
 //const ROOT_URL = 'https://jsonplaceholder.typicode.com'
-const ROOT = 'https://mejorado.herokuapp.com'
+const ROOT = 'https://raw.githubusercontent.com/acevedodavid/fakeJson/master/'
 
 export function questionData(param) {
     return {
@@ -53,6 +54,14 @@ export function fetchExams() {
     const request = axios.get(`${ROOT}/exams`);
     return {
         type: FETCH_EXAMS,
+        payload: request
+    };
+}
+
+export function examData() {
+    const request = axios.get(`${ROOT}/mock.json`);
+    return {
+        type: EXAM_DATA,
         payload: request
     };
 }
