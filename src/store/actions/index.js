@@ -52,7 +52,6 @@ export function fetchExams() {
 }
 
 export function createExam(values) {
-    console.log("values in actions", values)
     const request = axios.post(`${ROOT}/exams`, values);
     return {
         type: CREATE_EXAM,

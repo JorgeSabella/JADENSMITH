@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { 
     fetchSubjects,
     createExam
-} from '../../store/actions';
+} from '../../store/actions/index';
 
 class NewExam extends Component {
 
