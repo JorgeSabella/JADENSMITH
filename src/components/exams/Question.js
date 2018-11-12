@@ -76,6 +76,7 @@ class Question extends Component {
     // TODO onSubmit()
 
     onSubmit(values) {
+<<<<<<< HEAD
         if(document.getElementById("Dropdown").value == 1){
             const body = {
                 subject_id: document.getElementById("item").value,
@@ -117,6 +118,43 @@ class Question extends Component {
         }
         if (document.getElementById("Dropdown").value == 2){
             const body2 = {
+=======
+        const body;
+        if(document.getElementById("Dropdown").value == 1){
+            body =  {
+                question:{
+                    subject_id: document.getElementById("item").value,
+                    name: values.nombre,
+                    text: values.pregunta,
+                    tipo: document.getElementById("Dropdown").value,
+                    equation: values.ecuacion,
+                    "answers_attributes":[
+                        {
+                            "correct": false,
+                            "tipo": document.getElementById("Dropdown").value,
+                            "text": document.getElementById("op1").value,
+                        },
+                        {
+                            "correct": false,
+                            "tipo": document.getElementById("Dropdown").value,
+                            "text": document.getElementById("op2").value,
+                        },
+                        {
+                            "correct": false,
+                            "tipo": document.getElementById("Dropdown").value,
+                            "text": document.getElementById("op3").value,
+                        },                 
+                        {
+                            "correct": false,
+                            "tipo": document.getElementById("Dropdown").value,
+                            "text": document.getElementById("op4").value,
+                        }
+                    ]
+                }
+            };
+        } else if(document.getElementById("Dropdown").value == 2){
+            body =  {
+>>>>>>> bcfee76313a86c0169903a5261ab7f89421e126b
                 question:{
                     subject_id: document.getElementById("item").value,
                     name: values.nombre,
@@ -130,11 +168,17 @@ class Question extends Component {
                         }
                     ]
                 }
+<<<<<<< HEAD
             };
             this.props.createQuestion(body2);
         }
         if (document.getElementById("Dropdown").value == 3){
             const body3 = {
+=======
+            };  
+        } else {
+            body =  {
+>>>>>>> bcfee76313a86c0169903a5261ab7f89421e126b
                 question:{
                     subject_id: document.getElementById("item").value,
                     name: values.nombre,
@@ -142,6 +186,7 @@ class Question extends Component {
                     tipo: document.getElementById("Dropdown").value,
                     "answers_attributes":[
                         {
+<<<<<<< HEAD
                             "correct": document.getElementById("Verdadero").checked,
                             "tipo": document.getElementById("Dropdown").value,
                             "text": document.getElementById("Verdadero").checked,
@@ -151,6 +196,18 @@ class Question extends Component {
             };
             this.props.createQuestion(body3);
         }
+=======
+                            "correct": true,
+                            "tipo": document.getElementById("Dropdown").value,
+                            "text": values.correcta,
+                        }
+                    ]
+                }
+            };  
+        }
+
+        this.props.createQuestion(body);
+>>>>>>> bcfee76313a86c0169903a5261ab7f89421e126b
     }
 
     render() {
@@ -189,9 +246,14 @@ class Question extends Component {
                                 <Field label="Ecuación" name="ecuacion" component="textarea" type="text"/>
                                 <Field label="Valor Minimo de Variable" name="Min" component={this.renderTextField} type="text"/>
                                 <Field label="Valor Maximo de Variable" name="Max" component={this.renderTextField} type="text"/> 
+<<<<<<< HEAD
                                 <Field label="Nombre de Variable" name="Variable1" component={this.renderTextField} type="text"/> 
                                 <label>Respuestas</label>  
                                 <Field label="op1" name="group" component={this.renderRadioField} type="radio"/>
+=======
+                                <label>Respuestas</label>  
+                                <Field id="Res" label="op1" name="group" component={this.renderRadioField} type="radio"/>
+>>>>>>> bcfee76313a86c0169903a5261ab7f89421e126b
                                 <Field label="op2" name="group" component={this.renderRadioField} type="radio"/>
                                 <Field label="op3" name="group" component={this.renderRadioField} type="radio"/>
                                 <Field label="op4" name="group" component={this.renderRadioField} type="radio"/>  
@@ -204,7 +266,11 @@ class Question extends Component {
                             <div class="switch">
                                 <label>
                                 Falso
+<<<<<<< HEAD
                                 <input id="Verdadero" type="checkbox" />
+=======
+                                <input type="checkbox" />
+>>>>>>> bcfee76313a86c0169903a5261ab7f89421e126b
                                 <span class="lever"></span>
                                 Verdadero
                                 </label>
