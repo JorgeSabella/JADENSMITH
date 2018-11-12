@@ -15,13 +15,10 @@ class EditQuestion extends Component {
             TrueFalse: false
         }
     }
-<<<<<<< HEAD
 
     componentDidMount() {
         this.props.fetchSubjects();
     }
-=======
->>>>>>> bcfee76313a86c0169903a5261ab7f89421e126b
 
     renderTextField(field) {
         return (
