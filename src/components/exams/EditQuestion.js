@@ -1,6 +1,8 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+import {fetchSubjects } from '../../store/actions';
 
 
 class EditQuestion extends Component {
@@ -11,6 +13,10 @@ class EditQuestion extends Component {
             Open:false,
             TrueFalse: false
         }
+    }
+
+    componentDidMount() {
+        this.props.fetchSubjects();
     }
 
     renderTextField(field) {
@@ -71,7 +77,7 @@ class EditQuestion extends Component {
     // TODO onSubmit()
 
     render() {
-        const { handleSubmit, qdata } = this.props;
+        const { handleSubmit, qdata, posts } = this.props;
         console.log("in edit quesiton", qdata);
         return (
             <div className="container">
@@ -81,6 +87,16 @@ class EditQuestion extends Component {
                     </div>
                         <Field label="Nombre" name="nombre" component={this.renderTextField} type="text"/>
                         <Field label="Tema" name="descripcion" component={this.renderTextField} type="text"/>
+                    <div>
+                        <label>Materia</label>
+                        <select className='browser-default' id="item">
+                                {_.map(posts, function (option) {
+                                    return (
+                                    <option value={option.id} key={option.id}>{option.text}</option>
+                                    );
+                                })}
+                        </select>
+                    </div>
                         <div>
                             <label>Pregunta</label>
                             <div>
@@ -152,5 +168,5 @@ export default reduxForm({
       }
 
 })(
-    connect(mapStateToProps, null)(EditQuestion)
+    connect(mapStateToProps, {fetchSubjects})(EditQuestion)
 );

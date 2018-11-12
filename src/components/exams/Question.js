@@ -36,7 +36,7 @@ class Question extends Component {
             <div className="form-group">
                 <p>
                     <label>
-                        <input
+                        <input id={field.label + "True"}
                             type="radio"
                             {...field.input}
                         />
@@ -76,74 +76,81 @@ class Question extends Component {
     // TODO onSubmit()
 
     onSubmit(values) {
-        const body;
         if(document.getElementById("Dropdown").value == 1){
-            body =  {
+            const body = {
+                subject_id: document.getElementById("item").value,
+                name: values.nombre,
+                text: values.pregunta,
+                tipo: document.getElementById("Dropdown").value,
+                equation: values.ecuacion,
+                "variables":[
+                    {
+                        "name": values.Variable1,
+                        "high_num": values.Max,
+                        "low_num": values.Min                    
+                    }
+                ],
+                "answers_attributes":[
+                    {
+                        "correct": document.getElementById("op1True").value,
+                        "tipo": document.getElementById("Dropdown").value,
+                        "text": document.getElementById("op1").value,
+                    },
+                    {
+                        "correct": document.getElementById("op2True").value,
+                        "tipo": document.getElementById("Dropdown").value,
+                        "text": document.getElementById("op2").value,
+                    },
+                    {
+                        "correct": document.getElementById("op3True").value,
+                        "tipo": document.getElementById("Dropdown").value,
+                        "text": document.getElementById("op3").value,
+                    },                 
+                    {
+                        "correct": document.getElementById("op4True").value,
+                        "tipo": document.getElementById("Dropdown").value,
+                        "text": document.getElementById("op4").value,
+                    }
+                ]
+            };
+            this.props.createQuestion(body);
+        }
+        if (document.getElementById("Dropdown").value == 2){
+            const body2 = {
                 question:{
                     subject_id: document.getElementById("item").value,
                     name: values.nombre,
                     text: values.pregunta,
                     tipo: document.getElementById("Dropdown").value,
-                    equation: values.ecuacion,
                     "answers_attributes":[
                         {
-                            "correct": false,
+                            "correct": true,
                             "tipo": document.getElementById("Dropdown").value,
-                            "text": document.getElementById("op1").value,
-                        },
-                        {
-                            "correct": false,
-                            "tipo": document.getElementById("Dropdown").value,
-                            "text": document.getElementById("op2").value,
-                        },
-                        {
-                            "correct": false,
-                            "tipo": document.getElementById("Dropdown").value,
-                            "text": document.getElementById("op3").value,
-                        },                 
-                        {
-                            "correct": false,
-                            "tipo": document.getElementById("Dropdown").value,
-                            "text": document.getElementById("op4").value,
+                            "text": values.correcta,
                         }
                     ]
                 }
             };
-        } else if(document.getElementById("Dropdown").value == 2){
-            body =  {
-                question:{
-                    subject_id: document.getElementById("item").value,
-                    name: values.nombre,
-                    text: values.pregunta,
-                    tipo: document.getElementById("Dropdown").value,
-                    "answers_attributes":[
-                        {
-                            "correct": true,
-                            "tipo": document.getElementById("Dropdown").value,
-                            "text": values.correcta,
-                        }
-                    ]
-                }
-            };  
-        } else {
-            body =  {
-                question:{
-                    subject_id: document.getElementById("item").value,
-                    name: values.nombre,
-                    text: values.pregunta,
-                    tipo: document.getElementById("Dropdown").value,
-                    "answers_attributes":[
-                        {
-                            "correct": true,
-                            "tipo": document.getElementById("Dropdown").value,
-                            "text": values.correcta,
-                        }
-                    ]
-                }
-            };  
+            this.props.createQuestion(body2);
         }
-
-        this.props.createQuestion(body);
+        if (document.getElementById("Dropdown").value == 3){
+            const body3 = {
+                question:{
+                    subject_id: document.getElementById("item").value,
+                    name: values.nombre,
+                    text: values.pregunta,
+                    tipo: document.getElementById("Dropdown").value,
+                    "answers_attributes":[
+                        {
+                            "correct": document.getElementById("Verdadero").checked,
+                            "tipo": document.getElementById("Dropdown").value,
+                            "text": document.getElementById("Verdadero").checked,
+                        }
+                    ]
+                }
+            };
+            this.props.createQuestion(body3);
+        }
     }
 
     render() {
@@ -182,8 +189,9 @@ class Question extends Component {
                                 <Field label="Ecuación" name="ecuacion" component="textarea" type="text"/>
                                 <Field label="Valor Minimo de Variable" name="Min" component={this.renderTextField} type="text"/>
                                 <Field label="Valor Maximo de Variable" name="Max" component={this.renderTextField} type="text"/> 
+                                <Field label="Nombre de Variable" name="Variable1" component={this.renderTextField} type="text"/> 
                                 <label>Respuestas</label>  
-                                <Field id="Res" label="op1" name="group" component={this.renderRadioField} type="radio"/>
+                                <Field label="op1" name="group" component={this.renderRadioField} type="radio"/>
                                 <Field label="op2" name="group" component={this.renderRadioField} type="radio"/>
                                 <Field label="op3" name="group" component={this.renderRadioField} type="radio"/>
                                 <Field label="op4" name="group" component={this.renderRadioField} type="radio"/>  
@@ -196,7 +204,7 @@ class Question extends Component {
                             <div class="switch">
                                 <label>
                                 Falso
-                                <input type="checkbox" />
+                                <input id="Verdadero" type="checkbox" />
                                 <span class="lever"></span>
                                 Verdadero
                                 </label>
