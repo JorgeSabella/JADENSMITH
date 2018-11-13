@@ -7,6 +7,7 @@ export const QUESTION_DATA = 'question_data';
 export const FETCH_QUESTIONS = 'fetch_questions';
 export const CREATE_QUESTION = 'create_question';
 export const CREATE_EXAM = "create_exam";
+export const UPDATE_EXAM = "update_exam";
 export const FETCH_EXAMS = 'fetch_exams';
 
 //const ROOT_URL = 'https://jsonplaceholder.typicode.com'
@@ -68,8 +69,13 @@ export function createExam(values) {
     };
 }
 
-// TODO 
-// updateExam()
+export function updateExam(values, id) {
+    const request = axios.put(`${ROOT}/exams/${id}`, values);
+    return {
+        type: UPDATE_EXAM,
+        payload: request
+    };
+}
 
 // TODO 
 // updateQuestion()

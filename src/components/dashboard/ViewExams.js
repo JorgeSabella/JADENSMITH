@@ -24,7 +24,7 @@ class Exams extends Component {
         if(posts) {
             return _.map(posts, post=> {
                 return (
-                    <div className="col s3 l4" key={post.id}>
+                    <div className="col s12 m6 l4" key={post.id}>
                         <div className="card hoverable">
                             <div className="card-image">
                                 <img src="img/exam.png"></img>
@@ -33,7 +33,7 @@ class Exams extends Component {
                                     <a className="btn-floating halfway-fab waves-effect waves-light blue darken-3"
                                     onClick={() => this.sendData(post)}
                                     >
-                                        <i class="material-icons">edit</i>
+                                        <i className="material-icons">edit</i>
                                     </a>
                                 </NavLink>
                             </div>

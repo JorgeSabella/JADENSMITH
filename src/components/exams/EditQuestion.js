@@ -4,8 +4,6 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import {fetchSubjects } from '../../store/actions';
 
-
-
 class EditQuestion extends Component {
     constructor(){
         super()
@@ -167,7 +165,6 @@ export default reduxForm({
     initialValues: {
             tema: "myFirstName"
       }
-
 })(
     connect(mapStateToProps, {fetchSubjects})(EditQuestion)
 );
