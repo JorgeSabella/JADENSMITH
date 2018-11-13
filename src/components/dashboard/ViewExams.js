@@ -43,7 +43,9 @@ class Exams extends Component {
                                 </p>
                             </div>
                             <div className="card-action">
-                                <a href="#">This is a link</a>
+                                <NavLink to={'/exam/questions/' + post.id} key={post.id}>
+                                    <span className="indigo-text darken-4">Preguntas</span>
+                                </NavLink>
                             </div>
                         </div>
                     </div>
