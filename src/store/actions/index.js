@@ -5,6 +5,7 @@ export const FETCH_SUBJECT = 'fetch_subject';
 export const CREATE_SUBJECT = 'create_subject';
 export const FETCH_QUESTIONS = 'fetch_questions';
 export const FETCH_EXAM = 'fetch_exam';
+export const UPDATE_QUESTIONS = 'update_question';
 export const CREATE_QUESTION = 'create_question';
 export const CREATE_EXAM = "create_exam";
 export const UPDATE_EXAM = "update_exam";
@@ -54,6 +55,14 @@ export function createQuestion(values) {
         type: CREATE_QUESTION,
         payload: request
     }
+}
+
+export function updateQuestion(values, id) {
+    const request = axios.put(`${ROOT}/questions/${id}`, values);
+    return {
+        type: UPDATE_QUESTIONS,
+        payload: request
+    };
 }
 
 export function fetchExams() {
