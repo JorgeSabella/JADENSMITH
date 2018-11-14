@@ -76,13 +76,14 @@ class EditExam extends Component {
             },
             questions: this.checked_questions
         };
-        this.props.updateExam(body, this.props.data.id);
+        this.props.updateExam(body, this.props.data.id, () => {
+            this.props.history.push('/exams');
+        });
         // console.log("body", body)
         // console.log("props", this.props.data);
         //this.props.createExam(body);
         //console.log("results", values);
         // console.log("lauch", this.checked_questions);
-
     }
 
     renderField(field) {

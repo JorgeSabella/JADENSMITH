@@ -30,7 +30,9 @@ class ListQuestions extends Component {
     }
 
     clickDelete(e, question) {
-        this.props.deleteQuestion(question);
+        this.props.deleteQuestion(question, () => {
+            window.location.reload();
+        });
     }
 
     renderAllQuestions() {
@@ -68,7 +70,9 @@ class ListQuestions extends Component {
         }
         // this.props.createExam(body);
         // console.log(body);
-        this.props.createSubject(body);
+        this.props.createSubject(body, () => {
+            window.location.reload();
+        });
     }
 
     render() {
