@@ -17,12 +17,6 @@ class EditExam extends Component {
         this.props.fetchSubject(this.props.data.subject_id);
     }
 
-    sendQuestion(e, question) {
-        //console.log("q",question)
-        this.props.sendQuestionData(question);
-        this.props.history.push('/question/edit');
-    }
-
     onChange(question_id, event) {
         const options = this.props.options;
         let index;
@@ -63,7 +57,6 @@ class EditExam extends Component {
                                     <p>{question.text}</p>
                                 </div>
                                 <div className="card-action">
-                                    <button onClick={(e) => {this.sendQuestion(e, question)}}>Edit</button>
                                     <Field name={question.id} id={question.id} component={this.renderCheckbox.bind(this)} type="checkbox"/>
                                 </div>
                             </div>
@@ -83,13 +76,14 @@ class EditExam extends Component {
             },
             questions: this.checked_questions
         };
-        this.props.updateExam(body, this.props.data.id);
+        this.props.updateExam(body, this.props.data.id, () => {
+            this.props.history.push('/exams');
+        });
         // console.log("body", body)
         // console.log("props", this.props.data);
         //this.props.createExam(body);
         //console.log("results", values);
         // console.log("lauch", this.checked_questions);
-
     }
 
     renderField(field) {
@@ -146,9 +140,8 @@ function mapStateToProps(state) {
 export default connect(
     mapStateToProps,
     { fetchSubject, sendQuestionData, updateExam }
-)( reduxForm({
+)(reduxForm({
     form: 'EditExamForm',
     validate,
     enableReinitialize : true
 })(EditExam));
-

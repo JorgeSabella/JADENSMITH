@@ -33,7 +33,9 @@ class NewExam extends Component {
                 professor: values.profesor
             }
         };
-        this.props.createExam(body);
+        this.props.createExam(body, () => {
+            this.props.history.push('/exams');
+        });
     }
 
     render() {

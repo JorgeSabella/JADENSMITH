@@ -5,6 +5,7 @@ import { fetchExam } from '../../store/actions/index';
 import { fetchFinalExams } from '../../store/actions/finalExamsActions';
 import { fetchExamInfo } from '../../store/actions/examInfoActions';
 import * as jsPDF from 'jspdf'
+import { Collapsible, CollapsibleItem } from 'react-materialize'
 
 class ExamQuestions extends Component {
 
@@ -232,18 +233,15 @@ class ExamQuestions extends Component {
 
     renderQuestions() {
         const { posts } = this.props;
-        console.log(posts)
         if(posts) {
             return _.map(posts, post => {
                 return (
-                    <li>
-                        <div className="collapsible-header"><i class="material-icons">descripcion</i>{post.name}</div>
-                        <div className="collapsible-body"><span>{post.text}</span></div>
-                    </li>
+                    <CollapsibleItem header={post.name} icon='description'> 
+                        {post.text}
+                    </CollapsibleItem>
                 );
             });
         } else {
-            console.log("no hay preguntas")
         }
     }
 
@@ -256,9 +254,9 @@ class ExamQuestions extends Component {
                         {this.renderExamInfo()}
                     </ul>
                     <h4>Preguntas</h4>
-                    <ul className="collapsible">
+                    <Collapsible>
                         {this.renderQuestions()}
-                    </ul>
+                    </Collapsible>
                     <h6>Cantidad de examenes a generar:</h6>
                     <input type="number" value={this.state.quantity} onChange={this.handleInputChange}/>
                     <button type='button' onClick={this.createPDF} className="btn btn-primary" >Exportar</button>

@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchExams } from '../../store/actions/index';
+import { fetchExams, deleteExam } from '../../store/actions/index';
 import { sendExamData } from '../../store/actions/dataActions';
 
 class Exams extends Component {
@@ -18,9 +18,15 @@ class Exams extends Component {
         this.props.sendExamData(post);
     }
 
+    clickDeleteExam(e, exam_id) {
+        console.log("exam id", exam_id)
+        this.props.deleteExam(exam_id, () => {
+            window.location.reload();
+        });
+    }
+
     renderPosts() {
         const { posts } = this.props;
-        console.log("in view exmas", posts);
         if(posts) {
             return _.map(posts, post=> {
                 return (
@@ -43,8 +49,11 @@ class Exams extends Component {
                             </div>
                             <div className="card-action">
                                 <NavLink to={'/exam/questions/' + post.id} key={post.id}>
-                                    <span className="indigo-text darken-4">Preguntas</span>
+                                    <span className="indigo-text darken-4">Detalles</span>
                                 </NavLink>
+                                <a className="btn-floating btn-small right waves-effect waves-light red" onClick={(e) => {this.clickDeleteExam(e, post.id)}}>
+                                    <i class="material-icons">delete</i>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -84,4 +93,4 @@ function mapStateToProps(state) {
     return { posts: state.posts };
 }
 
-export default connect(mapStateToProps, { fetchExams, sendExamData })(Exams);
+export default connect(mapStateToProps, { fetchExams, sendExamData, deleteExam })(Exams);
