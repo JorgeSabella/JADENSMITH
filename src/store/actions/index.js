@@ -12,6 +12,7 @@ export const UPDATE_EXAM = "update_exam";
 export const FETCH_EXAMS = 'fetch_exams';
 
 //const ROOT_URL = 'https://jsonplaceholder.typicode.com'
+//const ROOT = 'https://raw.githubusercontent.com/acevedodavid/fakeJson/master/'
 const ROOT = 'https://mejorado.herokuapp.com'
 
 export function fetchSubject(id) {
@@ -86,5 +87,5 @@ export function updateExam(values, id) {
     };
 }
 
-// TODO 
+// TODO
 // updateQuestion()
