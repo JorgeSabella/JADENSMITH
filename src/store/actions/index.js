@@ -5,8 +5,10 @@ export const FETCH_SUBJECT = 'fetch_subject';
 export const CREATE_SUBJECT = 'create_subject';
 export const QUESTION_DATA = 'question_data';
 export const FETCH_QUESTIONS = 'fetch_questions';
+export const FETCH_EXAM = 'fetch_exam';
 export const CREATE_QUESTION = 'create_question';
 export const CREATE_EXAM = "create_exam";
+export const UPDATE_EXAM = "update_exam";
 export const FETCH_EXAMS = 'fetch_exams';
 
 //const ROOT_URL = 'https://jsonplaceholder.typicode.com'
@@ -60,6 +62,14 @@ export function fetchExams() {
     };
 }
 
+export function fetchExam(id) {
+    const request = axios.get(`${ROOT}/exams/${id}`);
+    return {
+        type: FETCH_EXAM,
+        payload: request
+    };
+}
+
 export function createExam(values) {
     const request = axios.post(`${ROOT}/exams`, values);
     return {
@@ -68,8 +78,13 @@ export function createExam(values) {
     };
 }
 
-// TODO 
-// updateExam()
+export function updateExam(values, id) {
+    const request = axios.put(`${ROOT}/exams/${id}`, values);
+    return {
+        type: UPDATE_EXAM,
+        payload: request
+    };
+}
 
 // TODO 
 // updateQuestion()
