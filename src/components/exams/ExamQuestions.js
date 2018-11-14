@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchExam } from '../../store/actions/index';
+import { Collapsible, CollapsibleItem, Modal } from 'react-materialize'
 
 class ExamQuestions extends Component {
 
@@ -13,18 +14,15 @@ class ExamQuestions extends Component {
 
     renderQuestions() {
         const { posts } = this.props;
-        console.log(posts)
         if(posts) {
             return _.map(posts, post => {
                 return (
-                    <li>
-                        <div className="collapsible-header"><i class="material-icons">description</i>{post.name}</div>
-                        <div className="collapsible-body"><span>{post.text}</span></div>
-                    </li>
+                    <CollapsibleItem header={post.name} icon='description'> 
+                        {post.text}
+                    </CollapsibleItem>
                 );
             });
         } else {
-            console.log("no hay preguntas")
         }
     }
 
@@ -32,9 +30,9 @@ class ExamQuestions extends Component {
         return (
             <div className="container white">
                 <form className = "white" >
-                    <ul className="collapsible">
+                    <Collapsible>
                         {this.renderQuestions()}
-                    </ul>
+                    </Collapsible>
                 </form>
             </div>
         );
