@@ -1,8 +1,9 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { fetchQuestions } from '../../store/actions/index';
+import { fetchQuestions, createSubject, deleteQuestion } from '../../store/actions/index';
 import { sendQuestionData } from '../../store/actions/dataActions';
 import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
 
 class ListQuestions extends Component {
     
@@ -14,6 +15,22 @@ class ListQuestions extends Component {
         //console.log("q",question)
         this.props.sendQuestionData(question);
         this.props.history.push('/question/edit');
+    }
+
+    renderField(field) {
+        return (
+            <div className="input-field">
+                <label>{field.label}</label>
+                <input
+                    type="text"
+                    {...field.input}
+                />
+            </div>
+        );
+    }
+
+    clickDelete(e, question) {
+        this.props.deleteQuestion(question);
     }
 
     renderAllQuestions() {
@@ -32,7 +49,9 @@ class ListQuestions extends Component {
                         </div>
                         <div className="card-action">
                             <button onClick={(e) => {this.sendQuestion(e, post)}}>Edit</button>
-                            <a href="#">This is a link</a>
+                            <a className="btn-floating right waves-effect waves-light red" onClick={(e) => {this.clickDelete(e, post.id)}}>
+                                <i className="material-icons">delete</i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -41,12 +60,29 @@ class ListQuestions extends Component {
         }
     }
 
+    onSubmit(values) {
+        const body =  {
+            subject: {
+                text: values.subject
+            }
+        }
+        // this.props.createExam(body);
+        // console.log(body);
+        this.props.createSubject(body);
+    }
+
     render() {
+        const { handleSubmit } = this.props;
         return (
             <div className="container">
-                <form className="white">
+                <form className="white" onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+                    <div className="section">
+                        <h3>Agregar Materia</h3>
+                        <Field label="Materia" name="subject" component={this.renderField}/>
+                        <button className = "btn pink lighten-1 z-depth-0" type="submit">Crear</button>
+                    </div>
                     <div className="col s12 m7">
-                        <h2>Preguntas</h2>
+                        <h3>Preguntas</h3>
                         {this.renderAllQuestions()}
                     </div>
                 </form>
@@ -55,10 +91,21 @@ class ListQuestions extends Component {
     }
 }
 
+function validate(values) {
+    const errors = {};
+    return errors;
+}
+
+
 function mapStateToProps(state) {
     return { 
         posts: state.posts
     };
 }
 
-export default connect(mapStateToProps, { fetchQuestions, sendQuestionData })(ListQuestions);
+export default reduxForm({
+    validate,
+    form: 'SendSubject'
+})(
+    connect(mapStateToProps, {fetchQuestions, sendQuestionData, createSubject, deleteQuestion})(ListQuestions)
+);

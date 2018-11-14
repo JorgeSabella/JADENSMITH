@@ -10,6 +10,7 @@ export const CREATE_QUESTION = 'create_question';
 export const CREATE_EXAM = "create_exam";
 export const UPDATE_EXAM = "update_exam";
 export const FETCH_EXAMS = 'fetch_exams';
+export const DELETE_QUESTION = 'delete_question';
 
 //const ROOT_URL = 'https://jsonplaceholder.typicode.com'
 const ROOT = 'https://mejorado.herokuapp.com'
@@ -86,5 +87,10 @@ export function updateExam(values, id) {
     };
 }
 
-// TODO 
-// updateQuestion()
+export function deleteQuestion(id) {
+    const request = axios.delete(`${ROOT}/questions/${id}`);
+    return {
+        type: DELETE_QUESTION,
+        payload: request
+    };
+}
