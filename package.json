@@ -2,6 +2,10 @@
   "name": "exams",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://jorgesabella.github.io/JADENSMITH",
+  "devDependencies": {
+    "gh-pages": "1.1.0"
+  },
   "dependencies": {
     "ajv": "^6.5.4",
     "axios": "^0.18.0",
@@ -16,6 +20,8 @@
     "redux-promise": "^0.6.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
