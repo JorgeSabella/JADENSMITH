@@ -37,8 +37,7 @@ class Exams extends Component {
                                 <span className="card-title black-text">{post.name}</span>
                                 <NavLink to="/exam/edit" className="white-text">
                                     <a className="btn-floating halfway-fab waves-effect waves-light blue darken-3"
-                                    onClick={() => this.sendData(post)}
-                                    >
+                                    onClick={() => this.sendData(post)}>
                                         <i className="material-icons">edit</i>
                                     </a>
                                 </NavLink>

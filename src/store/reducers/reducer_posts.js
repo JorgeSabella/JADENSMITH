@@ -1,8 +1,8 @@
 import _ from 'lodash';
-import { 
+import {
     FETCH_SUBJECT,
-    FETCH_SUBJECTS, 
-    QUESTION_DATA, 
+    FETCH_SUBJECTS,
+    QUESTION_DATA,
     FETCH_EXAMS,
     FETCH_EXAM,
     FETCH_QUESTIONS

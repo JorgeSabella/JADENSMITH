@@ -13,6 +13,7 @@ export const FETCH_EXAMS = 'fetch_exams';
 export const DELETE_QUESTION = 'delete_question';
 
 //const ROOT_URL = 'https://jsonplaceholder.typicode.com'
+//const ROOT = 'https://raw.githubusercontent.com/acevedodavid/fakeJson/master/'
 const ROOT = 'https://mejorado.herokuapp.com'
 
 export function fetchSubject(id) {
