@@ -11,24 +11,25 @@ class ExamQuestions extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          quantity: 1
+          quantity: 1,
+          examTitle: ""
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.createPDF = this.createPDF.bind(this);
     }
 
     componentDidMount() {
         const { params } = this.props.match;
         this.props.fetchExam(params.id);
         this.props.fetchExamInfo(params.id);
+        this.props.fetchFinalExams(params.id,1);
     }
 
     handleInputChange(event) {
-        const target = event.target;
-        const value = target.value;
-
+        const value = event.target.value;
         this.setState({
-          quantity: value
+            quantity: value
         });
     }
 
@@ -36,6 +37,8 @@ class ExamQuestions extends Component {
     createPDF() {
         const { params } = this.props.match;
         this.props.fetchFinalExams(params.id,this.state.quantity);
+        console.log(this.props.finalExams)
+        const { finalExams } = this.props;
 
         //to jump line in main doc
         function nextLine () {
@@ -64,7 +67,7 @@ class ExamQuestions extends Component {
             nextLine()
             doc.text(x,y,exam.institution)
             nextLine()
-            doc.text(x,y,exam.professor)
+            doc.text(x,y,"Profesor: " + exam.professor)
             nextLine()
             doc.text(x,y,"Examen tipo: " + numExamen)
             nextLine()
@@ -73,13 +76,30 @@ class ExamQuestions extends Component {
                 nextLine()
             })
             nextLine()
-            nextLine()
-            nextLine()
+        }
+
+        function printHeaderAnswerSheet (exam) {
+            as.text(xs,ys,exam.subject)
+            nextLineAS()
+            as.text(xs,ys,exam.name)
+            nextLineAS()
+            as.text(xs,ys,exam.institution)
+            nextLineAS()
+            as.text(xs,ys,exam.professor)
+            nextLineAS()
+            nextLineAS()
+
+            as.text(xs,ys,"Hoja de respuestas")
+            nextLineAS()
         }
 
         function printQuestion(question, questionNum) {
-            if (question.tipo == 1 || question.tipo == 2) {
-                doc.text(x,y,questionNum + ". " + question.text + " " + question.equation)
+            if (question.tipo == 1) {
+                if (question.equation == null) {
+                    doc.text(x,y,questionNum + ". " + question.text)
+                } else {
+                    doc.text(x,y,questionNum + ". " + question.text + " " + question.equation)
+                }
                 nextLine()
                 var letterNum = 0 //to start with 'a'
                 if (!_.isEmpty(question.answers)) {
@@ -93,11 +113,39 @@ class ExamQuestions extends Component {
                         letterNum += 1
                     })
                 }
+                nextLine()
+            } else if (question.tipo == 2) {
+                if (question.equation == null) {
+                    doc.text(x,y,questionNum + ". " + question.text)
+                } else {
+                    doc.text(x,y,questionNum + ". " + question.text + " " + question.equation)
+                }
+                nextLine()
+                nextLine()
+                nextLine()
+                nextLine()
             } else if (question.tipo == 3) {
-                doc.text(x,y,question.text + " " + question.equation)
+                if (question.equation == null) {
+                    doc.text(x,y,questionNum + ". " + question.text)
+                } else {
+                    doc.text(x,y,questionNum + ". " + question.text + " " + question.equation)
+                }
                 nextLine()
+                doc.text(x,y,"     a. Verdadero")
                 nextLine()
+                doc.text(x,y,"     b. Falso")
                 nextLine()
+                if (!_.isEmpty(question.answers)) {
+                    _.map(question.answers, answer => {
+                        if (answer.correct) {
+                            as.text(xs,ys,questionNum + ". a ")
+                            nextLineAS()
+                        } else {
+                            as.text(xs,ys,questionNum + ". b ")
+                            nextLineAS()
+                        }
+                    })
+                }
                 nextLine()
             }
         }
@@ -121,8 +169,15 @@ class ExamQuestions extends Component {
 
         var numExamen = 1
 
+        const { examInfo } = this.props;
+        _.map(examInfo, exam => {
+            return (
+                printHeaderAnswerSheet(exam)
+            );
+        });
+
         //For each exam
-        _.map(this.props.exams, exam => {
+        _.map(finalExams, exam => {
 
             as.text(xs,ys,"Examen " + numExamen)
             nextLineAS()
@@ -141,15 +196,18 @@ class ExamQuestions extends Component {
 
             //Add page and start at top for next exam to print
             doc.addPage()
-            as.addPage()
+            nextLineAS()
+            nextLineAS()
+
             y = 72
             ys = 72
             numExamen += 1
             nextLineAS()
         })
 
-        doc.save('test.pdf')
-        as.save('answerSheet.pdf')
+        doc.save("exams.pdf")
+        as.save("answerSheet.pdf")
+        //return false;
     }
 
     renderExamInfo() {
@@ -160,10 +218,10 @@ class ExamQuestions extends Component {
           return _.map(examInfo, exam => {
               return (
                   <li>
-                      <div><span>Nombre del examen: {exam.name} </span></div>
-                      <div><span>Institución: {exam.institution} </span></div>
-                      <div><span>Profesor: {exam.professor} </span></div>
-                      <div><span>Subject: {exam.subject} </span></div>
+                      <div className="collapsible-header"><span>Nombre del examen: {exam.name} </span></div>
+                      <div className="collapsible-header"><span>Institución: {exam.institution} </span></div>
+                      <div className="collapsible-header"><span>Profesor: {exam.professor} </span></div>
+                      <div className="collapsible-header"><span>Subject: {exam.subject} </span></div>
                   </li>
               );
           });
@@ -201,9 +259,10 @@ class ExamQuestions extends Component {
                     <ul className="collapsible">
                         {this.renderQuestions()}
                     </ul>
+                    <h6>Cantidad de examenes a generar:</h6>
+                    <input type="number" value={this.state.quantity} onChange={this.handleInputChange}/>
+                    <button type='button' onClick={this.createPDF} className="btn btn-primary" >Exportar</button>
                 </form>
-                <input type="number" value={this.state.quantity} onChange={this.handleInputChange}/>
-                <button onClick={this.createPDF.bind(this)} className="btn btn-primary" >Guardar</button>
             </div>
         );
     }
