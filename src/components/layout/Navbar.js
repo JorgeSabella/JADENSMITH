@@ -35,7 +35,12 @@ const Navbar = () => {
                 </li>
                 <li>
                     <NavLink to="/newexam" className="white-text">
-                        <i className="material-icons amber-text lighten-1">edit</i>Crear Examen
+                        <i className="material-icons amber-text lighten-1">edit</i>Nuevo Examen
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/question/list" className="white-text">
+                        <i className="material-icons amber-text lighten-1">assignment</i>Preguntas
                     </NavLink>
                 </li>
                 <li>

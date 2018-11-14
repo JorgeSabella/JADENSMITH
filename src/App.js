@@ -8,6 +8,7 @@ import Question from './components/exams/Question';
 import EditQuestion from './components/exams/EditQuestion';
 import EditExam from './components/exams/EditExam';
 import ExamQuestions from './components/exams/ExamQuestions';
+import ListQuestions from './components/exams/ListQuestions';
 
 class App extends Component {
   render() {
@@ -24,6 +25,7 @@ class App extends Component {
               <Route path='/exam/edit' component = {EditExam} />
               <Route path='/exam/questions/:id' component = {ExamQuestions} />
               <Route path='/question/edit' component = {EditQuestion} />
+              <Route path='/question/list' component = {ListQuestions} />
               <Route exact path='/question' component = {Question} />
               <Route exact path='/' component = {Home}/>
             </Switch>

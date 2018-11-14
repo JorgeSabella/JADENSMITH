@@ -146,9 +146,8 @@ function mapStateToProps(state) {
 export default connect(
     mapStateToProps,
     { fetchSubject, sendQuestionData, updateExam }
-)( reduxForm({
+)(reduxForm({
     form: 'EditExamForm',
     validate,
     enableReinitialize : true
 })(EditExam));
-

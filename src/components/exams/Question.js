@@ -50,21 +50,21 @@ class Question extends Component {
     }
 
     operation(){
-        if(document.getElementById("Dropdown").value == 1){
+        if(document.getElementById("Dropdown").value === 1){
             this.setState({
                 Choice:true,
                 Open:false,
                 TrueFalse: false
             })
         }
-        if(document.getElementById("Dropdown").value == 2){
+        if(document.getElementById("Dropdown").value === 2){
             this.setState({
                 Choice:false,
                 Open:true,
                 TrueFalse: false
             })
         }
-        if(document.getElementById("Dropdown").value == 3){
+        if(document.getElementById("Dropdown").value === 3){
             this.setState({
                 Choice:false,
                 Open:false,
@@ -76,7 +76,7 @@ class Question extends Component {
     // TODO onSubmit()
 
     onSubmit(values) {
-        if(document.getElementById("Dropdown").value == 1){
+        if(document.getElementById("Dropdown").value === 1){
             const body = {
                 subject_id: document.getElementById("item").value,
                 name: values.nombre,
@@ -115,7 +115,7 @@ class Question extends Component {
             };
             this.props.createQuestion(body);
         }
-        if (document.getElementById("Dropdown").value == 2){
+        if (document.getElementById("Dropdown").value === 2){
             const body2 = {
                 question:{
                     subject_id: document.getElementById("item").value,
@@ -133,7 +133,7 @@ class Question extends Component {
             };
             this.props.createQuestion(body2);
         }
-        if (document.getElementById("Dropdown").value == 3){
+        if (document.getElementById("Dropdown").value === 3){
             const body3 = {
                 question:{
                     subject_id: document.getElementById("item").value,

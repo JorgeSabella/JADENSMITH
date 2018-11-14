@@ -50,21 +50,21 @@ class EditQuestion extends Component {
     }
 
     operation(){
-        if(document.getElementById("Dropdown").value == 1){
+        if(document.getElementById("Dropdown").value === 1){
             this.setState({
                 Choice:true,
                 Open:false,
                 TrueFalse: false
             })
         }
-        if(document.getElementById("Dropdown").value == 2){
+        if(document.getElementById("Dropdown").value === 2){
             this.setState({
                 Choice:false,
                 Open:true,
                 TrueFalse: false
             })
         }
-        if(document.getElementById("Dropdown").value == 3){
+        if(document.getElementById("Dropdown").value === 3){
             this.setState({
                 Choice:false,
                 Open:false,
@@ -104,7 +104,7 @@ class EditQuestion extends Component {
                         </div>
                         <div>
                             <label>Tipo de Pregunta</label>
-                            <select id="Dropdown" onChange={() => this.operation()} class="browser-default" >
+                            <select id="Dropdown" onChange={() => this.operation()} className="browser-default" >
                                 <option value="1">Opcion Multiples</option>
                                 <option value="2">Abiertas</option>
                                 <option value="3">Verdadero o Falsos</option>
@@ -125,11 +125,11 @@ class EditQuestion extends Component {
 
                         {
                             this.state.TrueFalse?
-                            <div class="switch">
+                            <div className="switch">
                                 <label>
                                 Falso
                                 <input type="checkbox" />
-                                <span class="lever"></span>
+                                <span className="lever"></span>
                                 Verdadero
                                 </label>
                             </div>

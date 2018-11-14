@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchExam } from '../../store/actions/index';
-import { Collapsible, CollapsibleItem, Modal } from 'react-materialize'
+import { Collapsible, CollapsibleItem } from 'react-materialize'
 
 class ExamQuestions extends Component {
 
