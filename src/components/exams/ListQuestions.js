@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { fetchQuestions, createSubject } from '../../store/actions/index';
+import { fetchQuestions, createSubject, deleteQuestion } from '../../store/actions/index';
 import { sendQuestionData } from '../../store/actions/dataActions';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
@@ -29,6 +29,10 @@ class ListQuestions extends Component {
         );
     }
 
+    clickDelete(e, question) {
+        this.props.deleteQuestion(question);
+    }
+
     renderAllQuestions() {
         const { posts } = this.props;
         if (posts) {
@@ -45,6 +49,9 @@ class ListQuestions extends Component {
                         </div>
                         <div className="card-action">
                             <button onClick={(e) => {this.sendQuestion(e, post)}}>Edit</button>
+                            <a className="btn-floating right waves-effect waves-light red" onClick={(e) => {this.clickDelete(e, post.id)}}>
+                                <i className="material-icons">delete</i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -100,5 +107,5 @@ export default reduxForm({
     validate,
     form: 'SendSubject'
 })(
-    connect(mapStateToProps, {fetchQuestions, sendQuestionData, createSubject})(ListQuestions)
+    connect(mapStateToProps, {fetchQuestions, sendQuestionData, createSubject, deleteQuestion})(ListQuestions)
 );
