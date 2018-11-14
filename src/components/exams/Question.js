@@ -50,33 +50,35 @@ class Question extends Component {
     }
 
     operation(){
-        if(document.getElementById("Dropdown").value === 1){
+        if(document.getElementById("Dropdown").value == 1){
             this.setState({
                 Choice:true,
                 Open:false,
                 TrueFalse: false
-            })
+            })                
         }
-        if(document.getElementById("Dropdown").value === 2){
+        if(document.getElementById("Dropdown").value == 2){
             this.setState({
                 Choice:false,
                 Open:true,
                 TrueFalse: false
             })
         }
-        if(document.getElementById("Dropdown").value === 3){
+        if(document.getElementById("Dropdown").value == 3){
             this.setState({
                 Choice:false,
                 Open:false,
                 TrueFalse: true
             })
         }
+
+
     }
 
     // TODO onSubmit()
 
     onSubmit(values) {
-        if(document.getElementById("Dropdown").value === 1){
+        if(document.getElementById("Dropdown").value == 1){
             const body = {
                 subject_id: document.getElementById("item").value,
                 name: values.nombre,
@@ -88,6 +90,16 @@ class Question extends Component {
                         "name": values.Variable1,
                         "high_num": values.Max,
                         "low_num": values.Min                    
+                    },
+                    {
+                        "name": values.Variable2,
+                        "high_num": values.Max2,
+                        "low_num": values.Min2                    
+                    },
+                    {
+                        "name": values.Variable3,
+                        "high_num": values.Max3,
+                        "low_num": values.Min3                    
                     }
                 ],
                 "answers_attributes":[
@@ -115,7 +127,7 @@ class Question extends Component {
             };
             this.props.createQuestion(body);
         }
-        if (document.getElementById("Dropdown").value === 2){
+        if (document.getElementById("Dropdown").value == 2){
             const body2 = {
                 question:{
                     subject_id: document.getElementById("item").value,
@@ -133,7 +145,7 @@ class Question extends Component {
             };
             this.props.createQuestion(body2);
         }
-        if (document.getElementById("Dropdown").value === 3){
+        if (document.getElementById("Dropdown").value == 3){
             const body3 = {
                 question:{
                     subject_id: document.getElementById("item").value,
@@ -187,14 +199,31 @@ class Question extends Component {
                             <div>
                                 <label>Ecuación</label>
                                 <Field label="Ecuación" name="ecuacion" component="textarea" type="text"/>
-                                <Field label="Valor Minimo de Variable" name="Min" component={this.renderTextField} type="text"/>
-                                <Field label="Valor Maximo de Variable" name="Max" component={this.renderTextField} type="text"/> 
-                                <Field label="Nombre de Variable" name="Variable1" component={this.renderTextField} type="text"/> 
                                 <label>Respuestas</label>  
                                 <Field label="op1" name="group" component={this.renderRadioField} type="radio"/>
                                 <Field label="op2" name="group" component={this.renderRadioField} type="radio"/>
                                 <Field label="op3" name="group" component={this.renderRadioField} type="radio"/>
-                                <Field label="op4" name="group" component={this.renderRadioField} type="radio"/>  
+                                <Field label="op4" name="group" component={this.renderRadioField} type="radio"/> 
+                                <div class="section">
+                                    <label>Variable 1</label>
+                                    <Field label="Valor Minimo de Variable" name="Min" component={this.renderTextField} type="text"/>
+                                    <Field label="Valor Maximo de Variable" name="Max" component={this.renderTextField} type="text"/> 
+                                    <Field label="Nombre de Variable" name="Variable1" component={this.renderTextField} type="text"/> 
+                                </div>
+                                <div class="divider"></div>
+                                <div class="section">
+                                    <label>Variable 2</label>
+                                    <Field label="Valor Minimo de Variable 2" name="Min2" component={this.renderTextField} type="text"/>
+                                    <Field label="Valor Maximo de Variable 2" name="Max2" component={this.renderTextField} type="text"/> 
+                                    <Field label="Nombre de Variable 2" name="Variable2" component={this.renderTextField} type="text"/>
+                                </div>
+                                <div class="divider"></div>
+                                <div class="section">
+                                    <label>Variable 3</label>
+                                    <Field label="Valor Minimo de Variable 3" name="Min3" component={this.renderTextField} type="text"/>
+                                    <Field label="Valor Maximo de Variable 3" name="Max3" component={this.renderTextField} type="text"/> 
+                                    <Field label="Nombre de Variable 3" name="Variable3" component={this.renderTextField} type="text"/>
+                                </div>
                             </div>
                             :null                          
                         }
