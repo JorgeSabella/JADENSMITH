@@ -85,7 +85,7 @@ class Question extends Component {
                 text: values.pregunta,
                 tipo: document.getElementById("Dropdown").value,
                 equation: values.ecuacion,
-                "variables":[
+                "variables_attributes":[
                     {
                         "name": values.Variable1,
                         "high_num": values.Max,
